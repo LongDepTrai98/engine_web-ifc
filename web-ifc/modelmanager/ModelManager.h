@@ -21,6 +21,12 @@ namespace webifc::manager {
         uint32_t TAPE_SIZE = 67108864 ; // probably no need for anyone other than web-ifc devs to change this
         uint32_t MEMORY_LIMIT = 2147483648;
         uint16_t LINEWRITER_BUFFER = 10000;
+        double tolerancePlaneIntersection = 1.0E-04;
+        double toleranceBoundaryPoint = 1.0E-04;
+        double toleranceInsideOutsideToPlane = 1.0E-04;
+        double toleranceInsideOutside = 1.0E-10;
+        double toleranceScalarEquality = 1.0E-04;
+        uint16_t addPlaneIterations = 1;
     };
 
     class ModelManager {
@@ -36,6 +42,7 @@ namespace webifc::manager {
             uint32_t CreateModel(LoaderSettings settings);
             void SetLogLevel(uint8_t levelArg);
             void CloseAllModels();
+            void clearGeometryLoader(const uint32_t& modelID);
         private: 
             const webifc::schema::IfcSchemaManager _schemaManager; 
             std::vector<webifc::parsing::IfcLoader*> _loaders;
